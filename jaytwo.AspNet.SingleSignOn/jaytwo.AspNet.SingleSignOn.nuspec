@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>jaytwo.AspNet.SingleSignOn</id>
+    <version>$version$</version>
+    <description>Role provider to work with single-sign-on projects</description>
+    <authors>Jake Gough</authors>
+    <projectUrl>https://github.com/jakegough/jaytwo.AspNet.SingleSignOn/</projectUrl>
+    <licenseUrl>https://raw.githubusercontent.com/jakegough/jaytwo.AspNet.SingleSignOn/master/LICENSE</licenseUrl>
+    <tags>jakegough jaytwo aspnet sso single sign on</tags>
+  </metadata>
+</package>

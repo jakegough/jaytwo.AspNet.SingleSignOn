@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8C7E4D58-D06C-4665-B2E5-C487D50564EC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>jaytwo.AspNet.SingleSignOn</RootNamespace>
+    <AssemblyName>jaytwo.AspNet.SingleSignOn</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="jaytwo.Common, Version=0.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\jaytwo.CommonLib.0.1.1-alpha\lib\net40\jaytwo.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Exceptions\SsoException.cs" />
+    <Compile Include="Exceptions\SsoHandlerFactoryException.cs" />
+    <Compile Include="Exceptions\SsoInitializationException.cs" />
+    <Compile Include="SsoAppHost.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Security\AuthenticationProviderUserInfo.cs" />
+    <Compile Include="Security\SsoAppHostRoleProvider.cs" />
+    <Compile Include="Utilities\AspNetUtility.cs" />
+    <Compile Include="Utilities\FormsAuthenticationTicketUtility.cs" />
+    <Compile Include="Utilities\MimeTypeUtility.cs" />
+    <Compile Include="Utilities\SerializationUtility.cs" />
+    <Compile Include="WebHost\Content\SignedOut.aspx.cs">
+      <DependentUpon>SignedOut.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebHost\Content\SignedOut.aspx.designer.cs">
+      <DependentUpon>SignedOut.aspx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WebHost\Content\Unauthorized.aspx.cs">
+      <DependentUpon>Unauthorized.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebHost\Content\Unauthorized.aspx.designer.cs">
+      <DependentUpon>Unauthorized.aspx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WebHost\Handlers\AppHostHttpHandler.cs" />
+    <Compile Include="WebHost\Handlers\AppHostSignOnHandler.cs" />
+    <Compile Include="WebHost\Handlers\AppHostSignOnReturnHandler.cs" />
+    <Compile Include="WebHost\Handlers\AppHostSignOutHandler.cs" />
+    <Compile Include="WebHost\Handlers\QueryStringParameters.cs" />
+    <Compile Include="WebHost\SsoHttpHandlerFactory.cs" />
+    <Compile Include="WebHost\VirtualPath\EmbeddedResourceHttpHandler.cs" />
+    <Compile Include="WebHost\VirtualPath\EmbeddedResourceVirtualFile.cs" />
+    <Compile Include="WebHost\VirtualPath\EmbeddedResourceVirtualPathProvider.cs" />
+    <Compile Include="WebHost\VirtualPath\EmbeddedResourceVirtualPathUtility.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="WebHost\Content\SignedOut.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WebHost\Content\Unauthorized.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="jaytwo.AspNet.SingleSignOn.nuspec" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

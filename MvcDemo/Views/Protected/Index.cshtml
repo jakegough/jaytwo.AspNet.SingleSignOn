@@ -1,0 +1,28 @@
+﻿@using jaytwo.AspNet.MvcDemo.Security
+@inherits System.Web.Mvc.WebViewPage
+
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div>
+        <h1>
+            This is protected.
+        </h1>
+        hello world
+        <ul>
+            <li>EmailAddress: @DemoMvcUserProfile.Current.EmailAddress </li>
+        </ul>
+        <p>
+            <a href="@Url.Content("~/jaytwo_sso/sign_out")">sign out</a>
+        </p>
+    </div>
+</body>
+</html>
