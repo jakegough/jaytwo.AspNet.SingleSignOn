@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="jaytwo.AspNet.FormsAuth">
+      <HintPath>..\packages\jaytwo.AspNet.FormsAuth.0.1.0-alpha\lib\net40\jaytwo.AspNet.FormsAuth.dll</HintPath>
+    </Reference>
     <Reference Include="jaytwo.Common, Version=0.1.1.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\jaytwo.CommonLib.0.1.1-alpha\lib\net40\jaytwo.Common.dll</HintPath>
@@ -57,12 +60,9 @@
     <Compile Include="SsoAppHost.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Security\AuthenticationProviderUserInfo.cs" />
-    <Compile Include="Security\SsoAppHostRoleProvider.cs" />
+    <Compile Include="AuthenticationProviderUserInfo.cs" />
     <Compile Include="Utilities\AspNetUtility.cs" />
-    <Compile Include="Utilities\FormsAuthenticationTicketUtility.cs" />
     <Compile Include="Utilities\MimeTypeUtility.cs" />
-    <Compile Include="Utilities\SerializationUtility.cs" />
     <Compile Include="WebHost\Content\SignedOut.aspx.cs">
       <DependentUpon>SignedOut.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

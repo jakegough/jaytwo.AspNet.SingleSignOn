@@ -426,3 +426,5 @@
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1056:UriPropertiesShouldNotBeStrings", Scope = "member", Target = "jaytwo.AspNet.SingleSignOn.SsoAppHost.#OverrideRootApplicationUrl")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings", MessageId = "1#", Scope = "member", Target = "jaytwo.AspNet.SingleSignOn.OAuth2.OAuth2SsoAppHost.#.ctor(System.String,System.String,System.String,System.String)")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2243:AttributeStringLiteralsShouldParseCorrectly")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Scope = "member", Target = "jaytwo.AspNet.SingleSignOn.SsoAppHost.#GetCurrentUserProfile()")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Scope = "member", Target = "jaytwo.AspNet.SingleSignOn.SsoAppHost.#GetCurrentUserProfile`1()")]

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
-using jaytwo.AspNet.SingleSignOn.Security;
 using System.Web;
 using jaytwo.AspNet.SingleSignOn.WebHost.Handlers;
 using System.Web.Hosting;
@@ -15,6 +14,7 @@ using jaytwo.AspNet.SingleSignOn.Exceptions;
 using System.Web.Security;
 using System.Web.Routing;
 using jaytwo.Common.Http;
+using jaytwo.AspNet.FormsAuth;
 
 namespace jaytwo.AspNet.SingleSignOn
 {
@@ -122,7 +122,7 @@ namespace jaytwo.AspNet.SingleSignOn
 			return redirectUrl;
 		}
 
-		public void SignOnUser(HttpContextBase context, AuthenticationProviderUserInfo userInfo)
+		public void SignInUser(HttpContextBase context, AuthenticationProviderUserInfo userInfo)
 		{
 			if (context == null)
 			{
@@ -134,29 +134,15 @@ namespace jaytwo.AspNet.SingleSignOn
 				throw new ArgumentNullException("userInfo");
 			}
 
-			var userData = new Dictionary<string, object>();
-			userData[TicketUserDataKeys.Roles] = GetRolesForUser(userInfo);
-			userData[TicketUserDataKeys.Profile] = GetProfileForUser(userInfo);
+			var roles = GetRolesForUser(userInfo);
+            var userProfile = GetProfileForUser(userInfo);
 
-			var userDataJson = SerializationUtility.ToJson(userData);
-
-			FormsAuthenticationTicketUtility.SetFormsAuthenticationTicket(context, userInfo.UserName, userDataJson);
+            FormsAuthenticationAppHost.SignIn(userProfile, roles);
 		}
 
-		public virtual void SignOutUser(HttpContextBase context)
+		public virtual void SignOutUser()
 		{
-			if (context == null)
-			{
-				throw new ArgumentNullException("context");
-			}
-
-			FormsAuthentication.SignOut();
-			FormsAuthenticationTicketUtility.ClearFormsAuthenticationTicket(context);
-
-			if (context.Session != null)
-			{
-				context.Session.Abandon();
-			}
+			FormsAuthenticationAppHost.SignOut();
 		}
 
 		public virtual string[] GetRolesForUser(AuthenticationProviderUserInfo userInfo)
@@ -164,76 +150,29 @@ namespace jaytwo.AspNet.SingleSignOn
 			return new string[] { };
 		}
 
-		public virtual Type DeserializeUserProfileAsType
-		{
-			get
-			{
-				return typeof(object);
-			}
-		}
-
-		public virtual object GetProfileForUser(AuthenticationProviderUserInfo userInfo)
+		public virtual IUserProfile GetProfileForUser(AuthenticationProviderUserInfo userInfo)
 		{
 			if (userInfo == null)
 			{
 				throw new ArgumentNullException("userInfo");
 			}
 
-			return new { UserName = userInfo.UserName };
+			return new SimpleUserProfile(userInfo.UserName);
 		}
 
 		public string[] GetCurrentUserRoles()
 		{
-			var ticket = FormsAuthenticationTicketUtility.GetFormsAuthenticationTicket();
-
-			return (ticket != null)
-				? GetCurrentUserRoles(ticket)
-				: null;
+            return FormsAuthenticationAppHost.GetCurrentUserRoles();
 		}
 
-		public static string[] GetCurrentUserRoles(FormsAuthenticationTicket ticket)
+		public IUserProfile GetCurrentUserProfile()
 		{
-			if (ticket == null)
-			{
-				throw new ArgumentNullException("ticket");
-			}
-
-			var userData = SerializationUtility.FromJson<IDictionary<string, object>>(ticket.UserData);
-			var userDataArray = (userData[TicketUserDataKeys.Roles] as object[]) ?? new object[] { };
-			var result = userDataArray.Cast<string>().ToArray();
-			return result;
+            return FormsAuthenticationAppHost.GetCurrentUserProfile();
 		}
 
-		public object GetCurrentUserProfile()
+		public T GetCurrentUserProfile<T>() where T : IUserProfile
 		{
-			var ticket = FormsAuthenticationTicketUtility.GetFormsAuthenticationTicket();
-
-			return (ticket != null)
-				? GetCurrentUserProfile(ticket, DeserializeUserProfileAsType)
-				: null;
-		}
-
-		public T GetCurrentUserProfile<T>()
-		{
-			return (T)GetCurrentUserProfile();
-		}
-
-		public static object GetCurrentUserProfile(FormsAuthenticationTicket ticket, Type targetType)
-		{
-			if (ticket == null)
-			{
-				throw new ArgumentNullException("ticket");
-			}
-
-			if (targetType == null)
-			{
-				throw new ArgumentNullException("targetType");
-			}
-
-			var userData = SerializationUtility.FromJson<IDictionary<string, object>>(ticket.UserData);
-			var dictionary = userData[TicketUserDataKeys.Profile] as IDictionary<string, object>;
-			var result = SerializationUtility.FromDictionary(dictionary, targetType);
-			return result;
+            return FormsAuthenticationAppHost.GetCurrentUserProfile<T>();
 		}
 
 		protected string GetApplicationUrl(HttpRequestBase request, string path)
@@ -251,12 +190,6 @@ namespace jaytwo.AspNet.SingleSignOn
 			}
 
 			return result;
-		}
-
-		private static class TicketUserDataKeys
-		{
-			public static readonly string Roles = "roles";
-			public static readonly string Profile = "profile";
 		}
 	}
 }

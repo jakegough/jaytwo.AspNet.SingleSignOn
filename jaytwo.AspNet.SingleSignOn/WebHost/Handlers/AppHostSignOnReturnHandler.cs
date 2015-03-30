@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web;
-using jaytwo.AspNet.SingleSignOn.Security;
 
 namespace jaytwo.AspNet.SingleSignOn.WebHost.Handlers
 {
@@ -22,7 +21,7 @@ namespace jaytwo.AspNet.SingleSignOn.WebHost.Handlers
             }
 
             var userInfo = AppHost.GetUserInformationFromAuthenticationProviderReturn(context.Request);
-            AppHost.SignOnUser(context, userInfo);
+            AppHost.SignInUser(context, userInfo);
 
             var redirectUrl = AppHost.GetApplicationReturnUrl(context.Request);
             context.Response.Redirect(redirectUrl);

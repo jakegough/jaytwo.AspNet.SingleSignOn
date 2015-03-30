@@ -4,7 +4,6 @@ using DotNetOpenAuth.OpenId.Extensions.ProviderAuthenticationPolicy;
 using DotNetOpenAuth.OpenId.Extensions.SimpleRegistration;
 using DotNetOpenAuth.OpenId.RelyingParty;
 using jaytwo.AspNet.SingleSignOn;
-using jaytwo.AspNet.SingleSignOn.Security;
 using jaytwo.AspNet.SingleSignOn.Utilities;
 using System;
 using System.Collections.Generic;

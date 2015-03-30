@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using System.Web.Security;
-using jaytwo.AspNet.SingleSignOn.Security;
 
 namespace jaytwo.AspNet.SingleSignOn.WebHost.Handlers
 {
@@ -22,7 +21,7 @@ namespace jaytwo.AspNet.SingleSignOn.WebHost.Handlers
                 throw new ArgumentNullException("context");
             }
 
-            AppHost.SignOutUser(context);
+            AppHost.SignOutUser();
             context.Response.Redirect(AppHost.SignOutSuccessPagePath);
         }
     }

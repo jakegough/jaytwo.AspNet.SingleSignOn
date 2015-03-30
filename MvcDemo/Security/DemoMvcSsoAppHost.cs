@@ -1,4 +1,5 @@
-﻿using jaytwo.AspNet.SingleSignOn.Security;
+﻿using jaytwo.AspNet.FormsAuth;
+using jaytwo.AspNet.SingleSignOn;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -14,17 +15,10 @@ namespace jaytwo.AspNet.MvcDemo.Security
         {
         }
 
-        public override Type DeserializeUserProfileAsType
-        {
-            get
-            {
-                return typeof(DemoMvcUserProfile);
-            }
-        }
-
-        public override object GetProfileForUser(AuthenticationProviderUserInfo userInfo)
+        public override IUserProfile GetProfileForUser(AuthenticationProviderUserInfo userInfo)
         {
             var result = new DemoMvcUserProfile();
+            result.UserName = userInfo.UserName;
 
             // in the OpenIdAppHost.GetUserInformationFromAuthenticationProviderReturn we set the UserName to the email address
             result.EmailAddress = userInfo.UserName;
