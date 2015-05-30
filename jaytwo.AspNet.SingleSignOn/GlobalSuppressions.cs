@@ -428,3 +428,4 @@
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2243:AttributeStringLiteralsShouldParseCorrectly")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Scope = "member", Target = "jaytwo.AspNet.SingleSignOn.SsoAppHost.#GetCurrentUserProfile()")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Scope = "member", Target = "jaytwo.AspNet.SingleSignOn.SsoAppHost.#GetCurrentUserProfile`1()")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", Scope = "member", Target = "jaytwo.AspNet.SingleSignOn.AuthenticationProviderUserInfo.#Data")]
